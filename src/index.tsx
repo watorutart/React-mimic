@@ -2,14 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {BrowserRouter} from "react-router-dom";
+
 import reportWebVitals from './reportWebVitals';
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import Page404 from './components/pages/Page404';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
