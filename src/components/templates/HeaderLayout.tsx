@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
-import Header from "../components/organisms/layout/Header";
+import Header from "../organisms/layout/Header";
+import SideMenu from "../organisms/Menu/SideMenu";
 
 type Props = {
     children: ReactNode;
@@ -11,6 +12,7 @@ const HeaderLayout: FC<Props> = (props: Props) => {
     <>
       <div>HeaderLayout</div>
       <Header />
+      <SideMenu />
       {children}
     </>
   );

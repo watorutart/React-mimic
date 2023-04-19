@@ -5,7 +5,7 @@ import { homeRoutes } from "./HomeRoutes";
 
 import Home from "../components/pages/Home";
 import Page404 from "../components/pages/Page404";
-import HeaderLayout from "../templates/HeaderLayout";
+import HeaderLayout from "../components/templates/HeaderLayout";
 
 const Router: FC = memo(() => {
   return (
@@ -15,6 +15,14 @@ const Router: FC = memo(() => {
         <Route path="/" element={<Login />} />
         <Route
           path="/home"
+          element={
+            <HeaderLayout>
+              <Home />
+            </HeaderLayout>
+          }
+        />
+        <Route
+          path="/search"
           element={
             <HeaderLayout>
               <Home />
