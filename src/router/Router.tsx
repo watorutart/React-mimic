@@ -6,6 +6,7 @@ import { homeRoutes } from "./HomeRoutes";
 import Home from "../components/pages/Home";
 import Page404 from "../components/pages/Page404";
 import HeaderLayout from "../components/templates/HeaderLayout";
+import Search from "../components/pages/Search";
 
 const Router: FC = memo(() => {
   return (
@@ -25,7 +26,7 @@ const Router: FC = memo(() => {
           path="/search"
           element={
             <HeaderLayout>
-              <Home />
+              <Search />
             </HeaderLayout>
           }
         />

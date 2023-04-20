@@ -13,7 +13,9 @@ const HeaderLayout: FC<Props> = (props: Props) => {
       <div>HeaderLayout</div>
       <Header />
       <SideMenu />
-      {children}
+      <div>
+        {children}
+      </div>
     </>
   );
 };
