@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState } from "react";
+import InputText from "../atoms/input/InputText";
+import styled from "styled-components";
 
 const Search = () => {
   console.log("search");
-  return (
-    <div>Search</div>
-  )
-}
+  const [inputText, setInputText] = useState<string>(""); 
 
-export default Search
+  return (
+    <>
+    <div>
+      Search
+      <InputText
+        type="text"
+        inputText={inputText}
+        setInputText={setInputText}
+        placeholder="キーワード検索"
+      />
+    </div>
+    </>
+  );
+};
+
+const SContainer = styled.div`
+    width: 400px;
+`
+
+export default Search;

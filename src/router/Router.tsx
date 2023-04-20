@@ -9,9 +9,10 @@ import HeaderLayout from "../components/templates/HeaderLayout";
 import Search from "../components/pages/Search";
 
 const Router: FC = memo(() => {
+  console.log("Router");
   return (
     <>
-      <p>Router test</p>
+      {/* <p>Router test</p> */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route

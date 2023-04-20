@@ -10,6 +10,7 @@ const menuItems = [
 ];
 
 const SideMenu = () => {
+  console.log("SideMenu");
   const navigate = useNavigate();
 
   const onClickLogout = () => {
@@ -19,7 +20,6 @@ const SideMenu = () => {
 
   return (
     <>
-      <div>SideMenu</div>
       <div>
         <SNav>
           <ul>

@@ -33,7 +33,7 @@ const Login: FC = memo(() => {
             type="password"
             inputText={inputPassword}
             setInputText={setInputPassword}
-            placeholder="Enter your username"
+            placeholder="Enter your password"
           />
           <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton>
           <SSubmit type="submit" value="Login submit" />
