@@ -21,5 +21,5 @@ export const useAllTweets = () => {
           setLoading(false);
         });
     }, []);
-    return { getTweets, loading, tweets };
+    return { getTweets, loading, tweets, setTweets };
 }
