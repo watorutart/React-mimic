@@ -13,7 +13,9 @@ const Home: FC = memo(() => {
 
   const [tweetText, setTweetText] = useState(""); 
 
-  console.log(tweets);
+  // 最新のTweetを一番上に持ってくるため逆順に並び変え;
+  const rvsTweets = [...tweets].reverse();
+  console.log(rvsTweets);
 
   const onClickTweet = () => {
     console.log(tweetText);
@@ -33,7 +35,7 @@ const Home: FC = memo(() => {
     <div>
       <p>Home</p>
       <InputTweet inputText={tweetText} setInputText={setTweetText} onClick={onClickTweet}/>
-      {tweets.map((tweet)=> (
+      {rvsTweets.map((tweet)=> (
         <div key={tweet.id}>
           <TweetCard name={tweet.name} body={tweet.body}/>
         </div>
