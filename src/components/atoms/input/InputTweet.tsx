@@ -1,26 +1,41 @@
-import React, {ChangeEvent, FC} from 'react'
+import React, {ChangeEvent, FC, useState} from 'react'
 import styled from 'styled-components'
 import { SecondaryButton } from '../button/SecondaryButton'
+import { Tweet } from '../../../type/api/tweet';
 
 type Props = {
-    inputText: string;
-    setInputText: (str: string) => void;
-    onClick: () => void;
+    tweets: Array<Tweet>;
+    setTweets: (array: Array<Tweet>) => void;
 }
 
 const InputTweet: FC<Props> = (props: Props) => {
-  const {inputText, setInputText, onClick } = props;
+  const { tweets, setTweets } = props;
+  const [tweetText, setTweetText] = useState(""); 
 
   const onChangeText = (e: any) => {
-    setInputText(e.target.value);
+    setTweetText(e.target.value);
   };
+
+  const onClickTweet = () => {
+    console.log(tweetText);
+    let newTweet: Tweet = {
+      postId: 99,
+      id: tweets.length + 1,
+      name: "Guest",
+      body: tweetText,
+      email: "guest@xxx.com",
+    }
+
+    setTweets([...tweets, newTweet]);
+    setTweetText("");
+  }
 
   return (
     <TweetInputContainer>
-        <TweetInputTextArea placeholder='いまどうしてる？' value={inputText} onChange={onChangeText}/>
+        <TweetInputTextArea placeholder='いまどうしてる？' value={tweetText} onChange={onChangeText}/>
         <TweetInputActions>
-            <div>0/280</div>
-            <SecondaryButton onClick={onClick}>ツイート</SecondaryButton>
+            <div>{tweetText.length}/1000</div>
+            <SecondaryButton onClick={onClickTweet}>ツイート</SecondaryButton>
         </TweetInputActions>
     </TweetInputContainer>
   )
