@@ -1,19 +1,35 @@
-import { ChangeEvent, FC, memo, useState } from "react";
+import { ChangeEvent, FC, memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import InputText from "../atoms/input/InputText";
+import useAllUserInfo from "../../hooks/useAllUserInfo";
 
 const Login: FC = memo(() => {
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const navigate = useNavigate();
 
+  const { getUserInfo, userInfoLoading, userInfo, setUserInfo } = useAllUserInfo();
+  useEffect(() => getUserInfo(), []);
+  console.log("userInfo", userInfo);
+
   const onClickConfirm = () => {
     console.log(inputUserName, inputPassword);
     navigate("home");
   };
+
+  const onClickSubmit = () => {
+    console.log(inputUserName, inputPassword);
+    const loginUserInfo = userInfo?.find((user) => user.username===inputUserName && user.password===inputPassword);
+    console.log(loginUserInfo);
+    if (loginUserInfo !== undefined) {
+      navigate("home");
+    } else {
+      alert("ユーザーが見つかりません。");
+    }
+  }
 
   return (
     <>
@@ -35,8 +51,8 @@ const Login: FC = memo(() => {
             setInputText={setInputPassword}
             placeholder="Enter your password"
           />
-          <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton>
-          <SSubmit type="submit" value="Login submit" />
+          {/* <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton> */}
+          <SSubmit type="submit" value="Login" onClick={onClickSubmit}/>
           <p>
             Don't have an account? <SAhref href="#">Sign up</SAhref>
           </p>

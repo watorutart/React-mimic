@@ -15,30 +15,9 @@ const Router: FC = memo(() => {
       {/* <p>Router test</p> */}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route
-          path="/home"
-          element={
-            <HeaderLayout>
-              <Home />
-            </HeaderLayout>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <HeaderLayout>
-              <Search />
-            </HeaderLayout>
-          }
-        />
-        <Route
-          path="/*"
-          element={
-            <HeaderLayout>
-              <Page404 />
-            </HeaderLayout>
-          }
-        />
+        {homeRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.children} />
+        ))}
       </Routes>
     </>
   );
