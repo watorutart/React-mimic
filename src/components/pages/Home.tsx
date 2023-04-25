@@ -5,6 +5,7 @@ import { SecondaryButton } from "../atoms/button/SecondaryButton";
 import InputTweet from "../atoms/input/InputTweet";
 import { Tweet } from "../../type/api/tweet";
 import useAllUserInfo from "../../hooks/useAllUserInfo";
+import { useUserInfoStore } from "../../context/UserInfoStoreContext";
 
 const Home: FC = memo(() => {
   console.log("home");
@@ -12,22 +13,17 @@ const Home: FC = memo(() => {
   const { getTweets, loading, tweets, setTweets } = useAllTweets();
   useEffect(() => getTweets(), []);
 
-  const { getUserInfo, userInfoLoading, userInfo, setUserInfo } = useAllUserInfo();
-  useEffect(() => getUserInfo(), []);
-  console.log("userInfo", userInfo);
-
-  // 最新のTweetを一番上に持ってくるため逆順に並び変え;
-  const rvsTweets = [...tweets].reverse();
-  // console.log(rvsTweets);
+  const userInfo = useUserInfoStore();
+  console.log("home userInfo", userInfo);
 
   return (
     <div>
       <p>Home</p>
       <InputTweet tweets={tweets} setTweets={setTweets}/>
-      {rvsTweets.map((tweet)=> (
-        <div key={tweet.id}>
-          <TweetCard name={tweet.name} body={tweet.body}/>
-        </div>
+      {userInfo?.map((user, index) => (
+        user.tweets.map((tweet) => (
+          <TweetCard name={user.username} body={tweet.body} key={tweet.id} />
+        ))
       ))}
     </div>
   );
