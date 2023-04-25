@@ -12,10 +12,10 @@ const useAllUserInfo = () => {
   const { getPosts, postLoading, posts, setPosts } = useAllPosts();
   useEffect(() => getUsers(), []);
   useEffect(() => getPosts(), []);
+//   console.log(users);
+//   console.log(posts);
 
-  const [userInfoLoading, setUserInfoLoading] = useState(
-    userLoading && postLoading
-  );
+  const [userInfoLoading, setUserInfoLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<UserInfo[]>();
 
   const getUserInfo = useCallback(() => {
@@ -32,11 +32,12 @@ const useAllUserInfo = () => {
       };
     });
 
-    console.log("newUserInfo");
-    console.log(newUserInfo);
+    console.log("newUserInfo", newUserInfo);
     setUserInfo(newUserInfo);
-    setUserInfoLoading(false);
-  }, []);
+    if (userInfo !== undefined && userInfo.length !== 0) {
+        setUserInfoLoading(false);
+    }
+  }, [users, posts]);
 
   return { getUserInfo, userInfoLoading, userInfo, setUserInfo };
 };

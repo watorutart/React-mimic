@@ -12,7 +12,7 @@ const Login: FC = memo(() => {
   const navigate = useNavigate();
 
   const { getUserInfo, userInfoLoading, userInfo, setUserInfo } = useAllUserInfo();
-  useEffect(() => getUserInfo(), []);
+  useEffect(() => getUserInfo(), [getUserInfo]);
   console.log("userInfo", userInfo);
 
   const onClickConfirm = () => {
@@ -31,35 +31,39 @@ const Login: FC = memo(() => {
     }
   }
 
-  return (
-    <>
-      <div>Login</div>
-      <SContainer>
-        <STitle>Login Form</STitle>
-        <form>
-          <label>Username</label>
-          <InputText
-            type="text"
-            inputText={inputUserName}
-            setInputText={setInputUserName}
-            placeholder="Enter your username"
-          />
-          <label>Password</label>
-          <InputText
-            type="password"
-            inputText={inputPassword}
-            setInputText={setInputPassword}
-            placeholder="Enter your password"
-          />
-          {/* <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton> */}
-          <SSubmit type="submit" value="Login" onClick={onClickSubmit}/>
-          <p>
-            Don't have an account? <SAhref href="#">Sign up</SAhref>
-          </p>
-        </form>
-      </SContainer>
-    </>
-  );
+  if (userInfoLoading) {
+    return <div>Loading...</div>
+  } else {
+    return (
+      <>
+        <div>Login</div>
+        <SContainer>
+          <STitle>Login Form</STitle>
+          <form>
+            <label>Username</label>
+            <InputText
+              type="text"
+              inputText={inputUserName}
+              setInputText={setInputUserName}
+              placeholder="Enter your username"
+            />
+            <label>Password</label>
+            <InputText
+              type="password"
+              inputText={inputPassword}
+              setInputText={setInputPassword}
+              placeholder="Enter your password"
+            />
+            <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton>
+            <SSubmit type="submit" value="Login" onClick={onClickSubmit}/>
+            <p>
+              Don't have an account? <SAhref href="#">Sign up</SAhref>
+            </p>
+          </form>
+        </SContainer>
+      </>
+    );
+  }
 });
 
 const SContainer = styled.div`
