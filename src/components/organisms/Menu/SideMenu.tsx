@@ -7,6 +7,7 @@ import SideMenuButton from "../../atoms/button/SideMenuButton";
 const menuItems = [
   { name: "ホーム", link: "/home" },
   { name: "検索", link: "/search" },
+  { name: "ユーザー一覧", link: "/userlist"},
 ];
 
 const SideMenu = () => {

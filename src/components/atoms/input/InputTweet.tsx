@@ -24,15 +24,21 @@ const InputTweet: FC<Props> = (props: Props) => {
 
   const onClickTweet = () => {
     console.log(tweetText);
-    const newTweet: Tweet = {
-      postId: 99,
-      id: tweets.length + 1,
-      name: "Guest",
+    const newTweet: Post = {
+      userId: loginUserInfoStore.loginUserInfo.id,
+      id: loginUserInfoStore.loginUserInfo.tweets.length + 1,
+      title: "new Tweet",
       body: tweetText,
-      email: "guest@xxx.com",
     }
 
-    setTweets([...tweets, newTweet]);
+    loginUserInfoStore.loginUserInfo.tweets.push(newTweet);
+    const index = userInfo.allUserInfo.findIndex((user) => user === loginUserInfoStore.loginUserInfo);
+    console.log("LoginUser index", index);
+
+    const newAllUserInfo = [...userInfo.allUserInfo];
+    newAllUserInfo[index] = {...loginUserInfoStore.loginUserInfo};
+
+    userInfo.setAllUserInfo(newAllUserInfo);
     setTweetText("");
   }
 
@@ -62,7 +68,7 @@ const InputTweet: FC<Props> = (props: Props) => {
         <TweetInputActions>
             <div>{tweetText.length}/1000</div>
             <SecondaryButton onClick={onClickTweet}>ツイート</SecondaryButton>
-            <SecondaryButton onClick={onClickPost}>Post</SecondaryButton>
+            {/* <SecondaryButton onClick={onClickPost}>Post</SecondaryButton> */}
         </TweetInputActions>
     </TweetInputContainer>
   )

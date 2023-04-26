@@ -60,7 +60,7 @@ const Login: FC = memo(() => {
             setInputText={setInputPassword}
             placeholder="Enter your password"
           />
-          <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton>
+          {/* <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton> */}
           <SSubmit type="submit" value="Login" onClick={onClickSubmit} />
           <p>
             Don't have an account? <SAhref href="#">Sign up</SAhref>

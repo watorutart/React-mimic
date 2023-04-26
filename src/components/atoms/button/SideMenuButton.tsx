@@ -24,7 +24,7 @@ const SButton = styled.button`
   background-color: #ade5f3;
   color: #111111;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;

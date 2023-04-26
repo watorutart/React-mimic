@@ -13,7 +13,7 @@ const UserCard = (props: Props) => {
       <SUserCard key={user.id}>
         <SUserCardHeader>
           <SUserCardImg
-            src={`https://i.pravatar.cc/50?u=${user.id}`}
+            src={user.img}
           ></SUserCardImg>
           <SUsername>{user.username}</SUsername>
         </SUserCardHeader>
