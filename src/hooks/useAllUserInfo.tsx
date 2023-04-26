@@ -16,7 +16,7 @@ const useAllUserInfo = () => {
 //   console.log(posts);
 
   const [userInfoLoading, setUserInfoLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState<UserInfo[]>();
+  const [userInfo, setUserInfo] = useState<UserInfo[]>([]);
 
   const getUserInfo = useCallback(() => {
     console.log("func: getUserInfo", userInfoLoading);
@@ -28,6 +28,7 @@ const useAllUserInfo = () => {
         name: user.name,
         username: user.username,
         password: user.phone,
+        img: `https://i.pravatar.cc/50?u=${user.id}`,
         tweets: postsByUser,
       };
     });

@@ -3,11 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Login from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes";
 
-import Home from "../components/pages/Home";
-import Page404 from "../components/pages/Page404";
-import HeaderLayout from "../components/templates/HeaderLayout";
-import Search from "../components/pages/Search";
-
 const Router: FC = memo(() => {
   console.log("Router");
   return (

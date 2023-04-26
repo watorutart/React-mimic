@@ -6,6 +6,7 @@ export type UserInfo = {
     name: string;
     username: string;
     password: string; /* phone */
+    img: string;
     /* post型内のデータ */
     tweets: Post[];
 }

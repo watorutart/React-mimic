@@ -2,8 +2,15 @@ import { useState, useContext, createContext, ReactNode, useEffect } from "react
 import { UserInfo } from "../type/api/userinfo";
 import useAllUserInfo from "../hooks/useAllUserInfo";
 
-export const UserInfoStore = createContext<UserInfo[] | undefined>([]);
-// export const UserInfoStoreContext = createContext(null);
+type AllUserValue = {
+  allUserInfo: UserInfo[];
+  setAllUserInfo: React.Dispatch<React.SetStateAction<UserInfo[]>>;
+};
+
+export const UserInfoStore = createContext<AllUserValue>({
+  allUserInfo: [], 
+  setAllUserInfo: () => {}
+});
 
 type Props = {
     children: ReactNode;
@@ -13,17 +20,14 @@ export const UserInfoProvider = (props: Props) => {
   const { children } = props;
   const { getUserInfo, userInfoLoading, userInfo, setUserInfo } = useAllUserInfo();
   useEffect(() => getUserInfo(), [getUserInfo]);
-  const [userInfoStore, setUserInfoStore] = useState(userInfo);
+  // const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([...userInfo]);
 
   return (
-    <UserInfoStore.Provider value={userInfo}>
-      {/* <UserInfoStoreContext.Provider value={setUserInfo}> */}
+    // <UserInfoStore.Provider value={{allUserInfo, setAllUserInfo}}>
+    <UserInfoStore.Provider value={{allUserInfo: userInfo, setAllUserInfo: setUserInfo}}>
         {children}
-      {/* </UserInfoStoreContext.Provider> */}
     </UserInfoStore.Provider>
   );
 };
 
-export const useUserInfoStore = () => useContext(UserInfoStore);
-
-// export const useUpdateTheme = () => useContext(UserInfoStoreContext);
+export const useUserInfoStore = () => useContext(UserInfoStore)

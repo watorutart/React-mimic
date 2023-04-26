@@ -6,16 +6,18 @@ import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import InputText from "../atoms/input/InputText";
 import useAllUserInfo from "../../hooks/useAllUserInfo";
 import { useUserInfoStore } from "../../context/UserInfoStoreContext";
+import { useLoginUserInfo } from "../../context/LoginUserInfo";
 
 const Login: FC = memo(() => {
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const navigate = useNavigate();
 
-  // const { getUserInfo, userInfoLoading, userInfo, setUserInfo } = useAllUserInfo();
-  // useEffect(() => getUserInfo(), [getUserInfo]);
+  /* Contextの取得 */
   const userInfo = useUserInfoStore();
   console.log("userInfo", userInfo);
+  const loginUserInfoStore = useLoginUserInfo();
+  // console.log("loginUserInfoStore", loginUserInfoStore);
 
   const onClickConfirm = () => {
     console.log(inputUserName, inputPassword);
@@ -24,12 +26,14 @@ const Login: FC = memo(() => {
 
   const onClickSubmit = () => {
     console.log(inputUserName, inputPassword);
-    const loginUserInfo = userInfo?.find(
+    const loginUserInfo = userInfo?.allUserInfo.find(
       (user) =>
         user.username === inputUserName && user.password === inputPassword
     );
     console.log(loginUserInfo);
     if (loginUserInfo !== undefined) {
+      loginUserInfoStore.setLoginUserInfo(loginUserInfo);
+      console.log("Login success loginUserInfoStore", loginUserInfoStore);
       navigate("home");
     } else {
       alert("ユーザーが見つかりません。");

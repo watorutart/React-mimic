@@ -2,16 +2,17 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 type Props = {
+  img: string;
   name: string;
   body: string;
 };
 
 const TweetCard: FC<Props> = (props: Props) => {
-  const { name, body } = props;
+  const { img, name, body } = props;
   return (
     <STweetCard>
       <SProfileInfo>
-        <SProfileImg src="https://source.unsplash.com/random" alt="Profile Picture" />
+        <SProfileImg src={img} alt="Profile Picture" />
         <SProfileUsername>{name}</SProfileUsername>
       </SProfileInfo>
       <p>{body}</p>
