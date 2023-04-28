@@ -7,6 +7,8 @@ import InputText from "../atoms/input/InputText";
 import useAllUserInfo from "../../hooks/useAllUserInfo";
 import { useUserInfoStore } from "../../context/UserInfoStoreContext";
 import { useLoginUserInfo } from "../../context/LoginUserInfo";
+import { request } from "http";
+import { UserInfo } from "../../type/api/userinfo";
 
 const Login: FC = memo(() => {
   const [inputUserName, setInputUserName] = useState("");
@@ -15,7 +17,7 @@ const Login: FC = memo(() => {
 
   /* Contextの取得 */
   const userInfo = useUserInfoStore();
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
   const loginUserInfoStore = useLoginUserInfo();
   // console.log("loginUserInfoStore", loginUserInfoStore);
 
@@ -40,12 +42,35 @@ const Login: FC = memo(() => {
     }
   };
 
+  const onClickSubmitPost = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(inputUserName, inputPassword);
+    const response = await fetch("http://localhost:3001/login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username: inputUserName, password: inputPassword})
+    });
+    if (response.ok) {
+      // ログイン成功時
+      const user: UserInfo = await response.json();
+      console.log(response);
+      console.log(user);
+      navigate("home");
+    } else {
+      // ログイン失敗時
+      alert("POSTの結果: ユーザーが見つかりません");
+    }
+  }
+
   return (
     <>
       <div>Login</div>
       <SContainer>
         <STitle>Login Form</STitle>
-        <form>
+        {/* <form> */}
+        <form onSubmit={onClickSubmitPost}>
           <label>Username</label>
           <InputText
             type="text"
@@ -62,6 +87,9 @@ const Login: FC = memo(() => {
           />
           {/* <PrimaryButton onClick={onClickConfirm}>Login Btn</PrimaryButton> */}
           <SSubmit type="submit" value="Login" onClick={onClickSubmit} />
+          <br />
+          <br />
+          <SSubmit type="submit" value="New Login" />
           <p>
             Don't have an account? <SAhref href="#">Sign up</SAhref>
           </p>

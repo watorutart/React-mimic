@@ -1,6 +1,7 @@
 import Home from "../components/pages/Home";
 import Page404 from "../components/pages/Page404";
 import Search from "../components/pages/Search";
+import TestServer from "../components/pages/TestServer";
 import UserList from "../components/pages/UserList";
 import HeaderLayout from "../components/templates/HeaderLayout";
 
@@ -16,6 +17,10 @@ export const homeRoutes = [
     {
         path: "/userlist",
         children: <HeaderLayout><UserList /></HeaderLayout>
+    }, 
+    {
+        path: "/testserver",
+        children: <TestServer />
     }, 
     {
         path: "*",
