@@ -6,8 +6,15 @@ import { Routes, Route } from "react-router-dom";
 import Router from "./router/Router";
 import { UserInfoProvider } from "./context/UserInfoStoreContext";
 import { LoginUserInfoProvider } from "./context/LoginUserInfo";
+import { useShortcut } from "./hooks/useShortcut";
 
 function App() {
+  useShortcut({
+    key: "F",
+    shiftKey: true,
+    onKeyDown: () => console.log("Foo!!"),
+  });
+
   return (
     <>
       <UserInfoProvider>
